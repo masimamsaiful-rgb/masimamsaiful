@@ -372,12 +372,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center gap-2 py-1 px-2.5 bg-slate-800 hover:bg-slate-700/80 border border-slate-700 rounded-lg text-xs transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 sm:gap-2 py-1 px-2 sm:px-2.5 bg-slate-800 hover:bg-slate-700/80 border border-slate-700 rounded-lg text-xs transition-colors cursor-pointer"
+                title={`Akun aktif: ${currentUser.name} (${currentUser.role})`}
               >
-                <div className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold flex items-center justify-center text-[11px]">
+                <div className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold flex items-center justify-center text-[11px] shrink-0">
                   {currentUser.name.charAt(0).toUpperCase()}
                 </div>
-                <div className="text-left hidden md:block">
+                <div className="text-left hidden sm:block">
                   <div className="font-semibold text-slate-200 truncate max-w-[110px] leading-tight">
                     {currentUser.name.split(' ')[0]}
                   </div>
@@ -385,7 +386,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {currentUser.role}
                   </div>
                 </div>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                <div className="sm:hidden text-[10px] text-amber-400 font-semibold uppercase leading-tight">
+                  {currentUser.role}
+                </div>
+                <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
               </button>
 
               {/* User Dropdown Menu */}
@@ -467,6 +471,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </div>
 
                   <div className="border-t border-slate-700 pt-1">
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen(false);
+                        onOpenAuthModal();
+                      }}
+                      className="w-full text-left px-3.5 py-2 hover:bg-slate-700/60 text-slate-300 flex items-center gap-2"
+                    >
+                      <LogIn className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Ganti / Masuk Akun Lain</span>
+                    </button>
                     <button
                       onClick={() => {
                         setIsUserMenuOpen(false);
